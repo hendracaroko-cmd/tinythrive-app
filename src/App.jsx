@@ -5,12 +5,14 @@ import { getFirestore, doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { Lock, Star, Droplets, Footprints, Utensils, ArrowRight, Zap, User, LogOut, Scale, Bell, Activity, Coffee, Dumbbell, Flame, Calendar, Target, MapPin, Globe, Award, PlayCircle, Home, UserCircle, Settings, CalendarPlus, RefreshCw, ShieldCheck, Save, FastForward, Share2, Plus, Fingerprint } from 'lucide-react';
 
 // --- FIREBASE INITIALIZATION ---
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+// Menggunakan window. untuk lolos dari sensor strict mode Vercel
+const firebaseConfigStr = typeof window !== 'undefined' && window.__firebase_config ? window.__firebase_config : null;
+const firebaseConfig = firebaseConfigStr ? JSON.parse(firebaseConfigStr) : null;
 const app = firebaseConfig ? initializeApp(firebaseConfig) : null;
 const auth = app ? getAuth(app) : null;
 const db = app ? getFirestore(app) : null;
 
-const appIdRaw = typeof __app_id !== 'undefined' ? __app_id : 'tinythrive-v1';
+const appIdRaw = typeof window !== 'undefined' && window.__app_id ? window.__app_id : 'tinythrive-v1';
 const appId = appIdRaw.replace(/\//g, '_');
 
 // --- DATABASE KONTEN OLAHRAGA ---
@@ -372,8 +374,8 @@ export default function App() {
     }
     const initAuth = async () => {
       try {
-        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-          await signInWithCustomToken(auth, __initial_auth_token);
+        if (typeof window !== 'undefined' && window.__initial_auth_token) {
+          await signInWithCustomToken(auth, window.__initial_auth_token);
         } else {
           await signInAnonymously(auth);
         }
