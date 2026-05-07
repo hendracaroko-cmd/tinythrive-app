@@ -5,8 +5,14 @@ import { getFirestore, doc, setDoc, onSnapshot, updateDoc } from 'firebase/fires
 import { Lock, Star, Droplets, Footprints, Utensils, ArrowRight, Zap, User, LogOut, Scale, Bell, Activity, Coffee, Dumbbell, Flame, Calendar, Target, MapPin, Globe, Award, PlayCircle, Home, UserCircle, Settings, CalendarPlus, RefreshCw, ShieldCheck, Save, FastForward, Share2, Plus, Fingerprint, Loader2, CheckCircle2, AlertTriangle } from 'lucide-react';
 
 // --- FIREBASE INITIALIZATION ---
-const firebaseConfigStr = typeof window !== 'undefined' && window.__firebase_config ? window.__firebase_config : null;
-const firebaseConfig = firebaseConfigStr ? JSON.parse(firebaseConfigStr) : null;
+const firebaseConfig = {
+  apiKey: "AIzaSyAUN_VpSy-u_FvwCfJ1X2Pz5CgiUYQqLjw",
+  authDomain: "tinythrive-fe8b9.firebaseapp.com",
+  projectId: "tinythrive-fe8b9",
+  storageBucket: "tinythrive-fe8b9.firebasestorage.app",
+  messagingSenderId: "1021116393610",
+  appId: "1:1021116393610:web:604e2fe9c14d2c6cbc2573"
+};
 const app = firebaseConfig ? initializeApp(firebaseConfig) : null;
 const auth = app ? getAuth(app) : null;
 const db = app ? getFirestore(app) : null;
